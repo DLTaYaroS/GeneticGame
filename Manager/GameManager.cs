@@ -18,14 +18,12 @@ namespace GeneticGame
         {
             AddEats(10);
           
-            for (int i = 0; i < data.Bots.Count; i++)
+            foreach(Bot bot in data.Bots)
             {
-
-                Bot bot = data.Bots[i];
                 bot.BotCycle();
-                data.move.MoveBot(bot, data.BotModel);            
-            }        
-         
+                data.move.MoveBot(bot, data.BotModel);
+            }
+                   
             await Task.Delay(50);
 
         }
@@ -36,7 +34,6 @@ namespace GeneticGame
             for (int i = 0; i < CountBots; i++)
             { 
                 data.Bots.Add(new BotFactory().Create() as Bot);
-                data.mapa.Print(data.Eats[data.Eats.Count - 11].Figure);
             }
         }
     
