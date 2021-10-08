@@ -1,42 +1,68 @@
 ﻿using System.Threading.Tasks;
+using System.Linq;
 namespace GeneticGame
 {
     class GameManager
     {     
         private DataManager data;
-        public int BotSpeed { private get; set; }    
+        private int gameSpeed;
+        public int BotCount()
+        {
+            return data.ModelList.Bots.Count;
+        }
+        public int GameSpeed
+        {
+            private get { return gameSpeed; }
+            set
+            {
+                if (value >= 1)
+                {
+                    gameSpeed = value;
+                }
+                else
+                {
+                    gameSpeed = 20;
+                }
+            }
+        }
         public GameManager()
-        {        
+        {
+            GameSpeed = 10;
             data = DataManager.GetInstance();
         }
         public void Start()
         {
-            AddBot(100);
-            AddEats(100);
+            AddBot(50);
+            AddEats(300);
         }
+        
         public async Task GameCycle()
         {
-            AddEats(10);
-          
-            for (int i = 0; i < data.Bots.Count; i++)
+            //AddEats(25);
+            foreach(Bot bot in data.ModelList.Bots)
             {
-
-                Bot bot = data.Bots[i];
+           
+                data.move.MoveBot(bot, data.BotModel);
                 bot.BotCycle();
-                data.move.MoveBot(bot, data.BotModel);            
-            }        
-         
-            await Task.Delay(50);
-
+                Eat eat = data.ModelList.EatExistInCoord(bot.ModelCoord);
+                if (eat != null)
+                {
+                    bot.Eat();
+                  //  data.ModelList.RemoveEat(eat);
+                }
+            }
+         //   var selectClone = data.ModelList.Bots.Where(b => b.CheckPossibilityMakeBot()).Select(b => b.Clone()).ToList();
+         //   data.ModelList.Bots.RemoveAll(bot => bot.BotDied().ToList()); 
+            await Task.Delay(GameSpeed);
         }
 
         
         private void AddBot(uint CountBots)
         {           
             for (int i = 0; i < CountBots; i++)
-            { 
-                data.Bots.Add(new BotFactory().Create() as Bot);
-                data.mapa.Print(data.Eats[data.Eats.Count - 11].Figure);
+            {
+                data.ModelList.Bots.Add(new BotFactory().Create() as Bot);
+               // data.Bots.Add(new BotFactory().Create() as Bot);
             }
         }
     
@@ -45,7 +71,7 @@ namespace GeneticGame
             for(int i = 0; i < CountEats; i++)
             {
                 Eat eat = new EatFactory().Create() as Eat;
-                data.Eats.Add(eat);
+                data.ModelList.AddEat(eat);
                 data.mapa.Print(eat.Figure);
             }
         }

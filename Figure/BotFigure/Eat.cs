@@ -9,6 +9,5 @@ namespace GeneticGame
     {
         public Coord ModelCoord { get; set; }
         public Ellipse Figure { get; set; }
-        public int id { get; set; }
     } 
 }

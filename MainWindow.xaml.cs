@@ -31,7 +31,8 @@ namespace GeneticGame
             Game.Start();
             for (int i = 0; i < 1000; i++)
             {
-               await Game.GameCycle();//і тут
+                
+               await Game.GameCycle();
             }
         }
        

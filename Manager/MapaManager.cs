@@ -7,7 +7,7 @@ namespace GeneticGame
         MainWindow main;
         public MapaManager(MainWindow _main)
         { 
-            main = _main;
+            main = _main;//
         }
       
         public void Clean(Ellipse ellipse)
@@ -19,6 +19,7 @@ namespace GeneticGame
             
             main.LayoutRoot.Children.Add(ellipse);
         }
+        
         public void ChangePosition(ModelCreatorInput model,Coord coord,Ellipse Figure)
         {
             Clean(Figure);
