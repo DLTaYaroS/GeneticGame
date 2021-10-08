@@ -7,7 +7,7 @@ namespace GeneticGame
         MainWindow main;
         public MapaManager(MainWindow _main)
         { 
-            main = _main;
+            main = _main;//
         }
       
         public void Clean(Ellipse ellipse)
