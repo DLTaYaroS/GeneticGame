@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using GeneticGame.Figure.BotFigure;
 namespace GeneticGame
 {
     class FigureStorage
@@ -22,10 +22,13 @@ namespace GeneticGame
             DataManager.GetInstance().mapa.Clean(eat.Figure);
             Eats.Remove(eat);
         }
-        public void RemoveBot(Bot bot)
-        {
-            DataManager.GetInstance().mapa.Clean(bot.Figure);
-            Bots.Remove(bot);
+        public void RemoveBots(IEnumerable<Bot> bots)
+        { 
+            foreach(Bot bot in bots)
+            {
+                Bots.Remove(bot);
+                DataManager.GetInstance().mapa.Clean(bot.Figure);
+            }
         }
         public void AddBots(IEnumerable<Bot> bots)
         {

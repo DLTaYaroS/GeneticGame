@@ -1,5 +1,5 @@
 ﻿using System.Windows.Shapes;
-namespace GeneticGame
+namespace GeneticGame.Figure.FigureFactory
 {
     public interface IFigureModel
     { 

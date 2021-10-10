@@ -29,9 +29,8 @@ namespace GeneticGame
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {     
             Game.Start();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100000; i++)
             {
-                
                await Game.GameCycle();
             }
         }

@@ -15,8 +15,8 @@ namespace GeneticGame
 
             return new Coord
             {
-                X = data.rand.Next(data.LeftMargine, data.RightMargine),
-                Y = data.rand.Next(data.UpMargine, data.DownMargine)
+                X = data.rand.Next(data.limit.LeftMargine, data.limit.RightMargine),
+                Y = data.rand.Next(data.limit.UpMargine, data.limit.DownMargine)
             };
           
         }

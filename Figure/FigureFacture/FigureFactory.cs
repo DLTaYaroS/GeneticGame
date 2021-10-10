@@ -1,5 +1,5 @@
 ﻿
-namespace GeneticGame
+namespace GeneticGame.Figure.FigureFactory
 {
     public abstract class FigureFactory
     {

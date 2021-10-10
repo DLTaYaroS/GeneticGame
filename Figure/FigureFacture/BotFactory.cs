@@ -1,5 +1,5 @@
-﻿
-namespace GeneticGame
+﻿using GeneticGame.Figure.BotFigure;
+namespace GeneticGame.Figure.FigureFactory
 {
     public class BotFactory:FigureFactory
     {

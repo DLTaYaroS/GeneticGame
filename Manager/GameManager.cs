@@ -1,5 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Linq;
+using GeneticGame.Figure.FigureFactory;
+using GeneticGame.Figure.BotFigure;
+using System.Collections.Generic;
+
 namespace GeneticGame
 {
     class GameManager
@@ -38,21 +42,24 @@ namespace GeneticGame
         
         public async Task GameCycle()
         {
-            //AddEats(25);
-            foreach(Bot bot in data.ModelList.Bots)
+            AddEats(1);
+            List<Eat> selectEatList=new List<Eat>();
+            foreach (Bot bot in data.ModelList.Bots)
             {
            
                 data.move.MoveBot(bot, data.BotModel);
-                bot.BotCycle();
-                Eat eat = data.ModelList.EatExistInCoord(bot.ModelCoord);
-                if (eat != null)
-                {
-                    bot.Eat();
-                  //  data.ModelList.RemoveEat(eat);
-                }
+                bot.Step();
+                var selectEat = data.ModelList.Eats.Where(e => e.ModelCoord.Equals(bot.ModelCoord)).ToList();
+                selectEat.ForEach(e=>bot.Eat());
+                 selectEatList.AddRange(selectEat);
+                
+               
             }
-         //   var selectClone = data.ModelList.Bots.Where(b => b.CheckPossibilityMakeBot()).Select(b => b.Clone()).ToList();
-         //   data.ModelList.Bots.RemoveAll(bot => bot.BotDied().ToList()); 
+            selectEatList.ForEach(data.ModelList.RemoveEat);
+            var selectClone = data.ModelList.Bots.Where(b => b.CheckPossibilityMakeBot()).Select(b => b.Clone()).ToList();
+            data.ModelList.AddBots(selectClone);
+            var SelectDeadBot = data.ModelList.Bots.Where(bot => bot.BotDied()).ToList();
+            data.ModelList.RemoveBots(SelectDeadBot); 
             await Task.Delay(GameSpeed);
         }
 

@@ -1,5 +1,6 @@
-﻿namespace GeneticGame
-{
+﻿using GeneticGame.Figure.BotFigure;
+namespace GeneticGame.Figure.FigureFactory
+{ 
     public class EatFactory:FigureFactory
     {
         protected override IFigureModel Make()

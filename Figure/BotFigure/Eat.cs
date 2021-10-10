@@ -1,9 +1,6 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Shapes;
-
-namespace GeneticGame
+﻿using System.Windows.Shapes;
+using GeneticGame.Figure.FigureFactory;
+namespace GeneticGame.Figure.BotFigure
 {
     class Eat: IFigureModel
     {

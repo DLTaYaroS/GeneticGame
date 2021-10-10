@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Shapes;
-namespace GeneticGame
+﻿namespace GeneticGame.Figure.BotFigure
 {
     interface IBot
     {
-        
-        public int ChanceChangeDirection { get; set; }
-        public Coord Direction { get; set; }
+        public int ChanceChangeDirection { get; }
+        public Coord? MoveDirection { get; set; }
         public void Eat();
-        public Bot CloneMute(int id);
+        public Bot Clone();
         public void Step();
     }
 }

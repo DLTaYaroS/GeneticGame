@@ -1,4 +1,4 @@
-﻿namespace GeneticGame
+﻿namespace GeneticGame.Figure.BotFigure
 {
     class BotEnergy:IBotEnergy
     {
@@ -6,10 +6,10 @@
         public BotEnergy(BotCharacters characters)
         {
             EnergyCycle = 0;
-            Energy = 8024;
+            Energy = 9128;
             EnergyCycle += characters.Size*5;
             EnergyCycle += characters.Speed *5;
-            EnergyFromEat = 512;
+            EnergyFromEat = 9128;
             EnergyForCloned= characters.EnergyForCloned;
         }
         private int EnergyCycle;

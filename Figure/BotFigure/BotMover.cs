@@ -1,28 +1,20 @@
-﻿using System;
-namespace GeneticGame
+﻿using GeneticGame.Map;
+namespace GeneticGame.Figure.BotFigure
 {
     class BotMover
     {
         DataManager data;
-        int LeftMargine;
-        int RightMargine;
-        int UpMargine;
-        int DownMargine;
+        MargineLimit limit;
         private int StepGo;
         Coord coord;
         Coord Direction;
-        private MapaManager mapa;
-        public BotMover(MainWindow main)
+        private MapManager mapa;
+        public BotMover(MargineLimit _limit)
         {
-           
+            limit = _limit;
             data = DataManager.GetInstance();
             mapa = data.mapa;           
             StepGo = 1;
-            LeftMargine = -Convert.ToInt32(main.Width * 2);
-            UpMargine = -Convert.ToInt32(main.Height * 2);
-            RightMargine = Convert.ToInt32(main.Width * 2);
-            DownMargine = Convert.ToInt32(main.Height * 2);
-
         }
         private void ChangeCoord()
         {
@@ -36,7 +28,7 @@ namespace GeneticGame
             coord =bot.ModelCoord;
             if (!BotOverMargine())
             {
-                if (bot.ChanceChangeDirectione > data.rand.Next(1, 100) && bot.MoveDirection != null)
+                if (bot.ChanceChangeDirection > data.rand.Next(1, 100) && bot.MoveDirection != null)
                 {
                     Direction = (Coord)bot.MoveDirection;
  
@@ -94,13 +86,13 @@ namespace GeneticGame
         }
         public bool BotOverMargine()
         {      
-            if (coord.X > RightMargine)
+            if (coord.X > limit.RightMargine)
                 Left();
-           else if (coord.X < LeftMargine)
+           else if (coord.X < limit.LeftMargine)
                 Right();
-           else if(coord.Y < UpMargine)
+           else if(coord.Y < limit.UpMargine)
                 Down();
-           else if (coord.Y > DownMargine)
+           else if (coord.Y > limit.DownMargine)
                 Up();
             else
                  return false;

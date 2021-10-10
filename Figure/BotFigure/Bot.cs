@@ -1,9 +1,26 @@
 ﻿using System.Windows.Shapes;
-namespace GeneticGame
+using GeneticGame.Figure.FigureFactory;
+using System.Windows;
+using System.Windows.Media;
+
+namespace GeneticGame.Figure.BotFigure
 {
-    class Bot: IFigureModel
+    class Bot: IFigureModel,IBot
     {
-        public void BotCycle()
+        protected BotCharacters characters;
+        private BotEnergy energy;
+        public Coord? MoveDirection { get; set; }
+        public int ChanceChangeDirection
+        {
+            get { return characters.ChanceChangeDirectione; }
+        }
+
+        public Coord ModelCoord { get; set; }
+        public Ellipse Figure { get; set; }
+        
+        
+
+        public void Step()
         {
             energy.CycleEnergy();
         }
@@ -20,30 +37,26 @@ namespace GeneticGame
             return energy.LowEnergy();
         }
 
-        protected BotCharacters characters;
+        
         public Bot()
         {
-            characters = new BotCharacters { ChanceChangeDirectione = 55, EnergyForCloned = 1024, Size = 4, Speed = 4 };
-
+            characters = new BotCharacters { ChanceChangeDirectione = 55, EnergyForCloned = 10000, Size = 4, Speed = 4 };
             energy = new BotEnergy(characters);
-        }
-        
-
-        private BotEnergy energy;
-        public Coord? MoveDirection { get; set; }
-        public int ChanceChangeDirectione
+        }   
+        private Bot(Bot other)
         {
-            get { return characters.ChanceChangeDirectione; }
+            this.characters = other.characters;
+            this.characters.Size.MutateChange(1);
+            this.characters.Speed.MutateChange(1);
+            this.characters.EnergyForCloned.MutateChange(32);
+            this.characters.ChanceChangeDirectione.MutateChange(10);
+            energy = new BotEnergy(characters);       
         }
-
-        public Coord ModelCoord { get; set; }
-        public Ellipse Figure { get; set; }
-         
-
         public Bot Clone()
         {
             energy.BotMakeClone();
-            return new MutateBot();
+            DataManager data = DataManager.GetInstance();
+            return new Bot(this) { ModelCoord = this.ModelCoord, Figure = data.create.GetModel(this.ModelCoord, data.RedBotModel) };
         }
     }
 }
