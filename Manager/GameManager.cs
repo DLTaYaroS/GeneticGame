@@ -1,39 +1,75 @@
 ﻿using System.Threading.Tasks;
+using System.Linq;
+using GeneticGame.Figure.FigureFactory;
+using GeneticGame.Figure.BotFigure;
+using System.Collections.Generic;
+
 namespace GeneticGame
 {
     class GameManager
     {     
         private DataManager data;
-        public int BotSpeed { private get; set; }    
+        private int gameSpeed;
+        public int BotCount()
+        {
+            return data.ModelList.Bots.Count;
+        }
+        public int GameSpeed
+        {
+            private get { return gameSpeed; }
+            set
+            {
+                if (value >= 1)
+                {
+                    gameSpeed = value;
+                }
+                else
+                {
+                    gameSpeed = 20;
+                }
+            }
+        }
         public GameManager()
-        {        
+        {
+            GameSpeed = 10;
             data = DataManager.GetInstance();
         }
         public void Start()
         {
-            AddBot(100);
-            AddEats(100);
+            AddBot(50);
+            AddEats(300);
         }
+        
         public async Task GameCycle()
         {
-            AddEats(10);
-          
-            foreach(Bot bot in data.Bots)
+            AddEats(1);
+            List<Eat> selectEatList=new List<Eat>();
+            foreach (Bot bot in data.ModelList.Bots)
             {
-                bot.BotCycle();
+           
                 data.move.MoveBot(bot, data.BotModel);
+                bot.Step();
+                var selectEat = data.ModelList.Eats.Where(e => e.ModelCoord.Equals(bot.ModelCoord)).ToList();
+                selectEat.ForEach(e=>bot.Eat());
+                 selectEatList.AddRange(selectEat);
+                
+               
             }
-                   
-            await Task.Delay(50);
-
+            selectEatList.ForEach(data.ModelList.RemoveEat);
+            var selectClone = data.ModelList.Bots.Where(b => b.CheckPossibilityMakeBot()).Select(b => b.Clone()).ToList();
+            data.ModelList.AddBots(selectClone);
+            var SelectDeadBot = data.ModelList.Bots.Where(bot => bot.BotDied()).ToList();
+            data.ModelList.RemoveBots(SelectDeadBot); 
+            await Task.Delay(GameSpeed);
         }
 
         
         private void AddBot(uint CountBots)
         {           
             for (int i = 0; i < CountBots; i++)
-            { 
-                data.Bots.Add(new BotFactory().Create() as Bot);
+            {
+                data.ModelList.Bots.Add(new BotFactory().Create() as Bot);
+               // data.Bots.Add(new BotFactory().Create() as Bot);
             }
         }
     
@@ -42,7 +78,7 @@ namespace GeneticGame
             for(int i = 0; i < CountEats; i++)
             {
                 Eat eat = new EatFactory().Create() as Eat;
-                data.Eats.Add(eat);
+                data.ModelList.AddEat(eat);
                 data.mapa.Print(eat.Figure);
             }
         }

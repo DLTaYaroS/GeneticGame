@@ -1,35 +1,25 @@
-﻿using System;
-
-
-namespace GeneticGame
+﻿using GeneticGame.Map;
+namespace GeneticGame.Figure.BotFigure
 {
     class BotMover
     {
-        int LeftMargine;
-        int RightMargine;
-        int UpMargine;
-        int DownMargine;
+        DataManager data;
+        MargineLimit limit;
         private int StepGo;
         Coord coord;
         Coord Direction;
-        Random rand;
-        private MapaManager mapa;
-        public BotMover(MainWindow main,MapaManager _mapa)
+        private MapManager mapa;
+        public BotMover(MargineLimit _limit)
         {
-            mapa = _mapa;
-            rand = new Random(DateTime.Now.Millisecond);
-            StepGo = 20;
-            LeftMargine = -Convert.ToInt32(main.Width*2  );
-            UpMargine = -Convert.ToInt32(main.Height*2  );
-            RightMargine = Convert.ToInt32(main.Width*2 ) ;
-            DownMargine = Convert.ToInt32(main.Height*2 ) ;
-            
+            limit = _limit;
+            data = DataManager.GetInstance();
+            mapa = data.mapa;           
+            StepGo = 1;
         }
         private void ChangeCoord()
         {
             coord.X += Direction.X;
-            coord.Y += Direction.Y;
-            
+            coord.Y += Direction.Y;           
         }
         public void MoveBot(Bot bot, ModelCreatorInput model)
         {
@@ -38,7 +28,7 @@ namespace GeneticGame
             coord =bot.ModelCoord;
             if (!BotOverMargine())
             {
-                if (bot.ChanceChangeDirectione > rand.Next(1, 100) && bot.MoveDirection != null)
+                if (bot.ChanceChangeDirection > data.rand.Next(1, 100) && bot.MoveDirection != null)
                 {
                     Direction = (Coord)bot.MoveDirection;
  
@@ -46,20 +36,13 @@ namespace GeneticGame
                 else
                 {
                     Go();
-                }
-      
-                         
-            }
-            
-            
-            
-            
-            bot.MoveDirection = Direction;
+                }                        
+            }            
+          
             ChangeCoord();
+            bot.MoveDirection = Direction;
             bot.ModelCoord = coord;
             mapa.ChangePosition(model, bot.ModelCoord, bot.Figure);
-
-
         }
         private void Down()
         {
@@ -71,7 +54,6 @@ namespace GeneticGame
             Direction.X += -StepGo;
             Direction.Y += StepGo;
         }
-
         private void DownRight()
         {
             Direction.X += StepGo;
@@ -86,7 +68,6 @@ namespace GeneticGame
         {
             Direction.X += StepGo;
             Direction.Y += 0;
-
         }
         private void Up()
         {
@@ -105,24 +86,21 @@ namespace GeneticGame
         }
         public bool BotOverMargine()
         {      
-            if (coord.X > RightMargine)
+            if (coord.X > limit.RightMargine)
                 Left();
-           else if (coord.X < LeftMargine)
+           else if (coord.X < limit.LeftMargine)
                 Right();
-           else if(coord.Y < UpMargine)
+           else if(coord.Y < limit.UpMargine)
                 Down();
-           else if (coord.Y > DownMargine)
+           else if (coord.Y > limit.DownMargine)
                 Up();
             else
                  return false;
-
             return true;
         }
         private void Go()
-        {
-           
-    
-            switch (rand.Next(1, 9))
+        {  
+            switch (data.rand.Next(1, 9))
             {
                 case 1:
                     Down();
