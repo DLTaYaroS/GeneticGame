@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GeneticGame
+﻿using GeneticGame.Figure.BotFigure;
+namespace GeneticGame.Figure.FigureFactory
 {
-    public class BotFactory:FigureFactory
+    public class BotFactory
     {
-        protected override IFigureModel Make()
+        internal Bot Create()
         {
             Coord coord = Coord.GetRandomCoord();
             DataManager data = DataManager.GetInstance();
-            IFigureModel result = new Bot() { ModelCoord = coord, Figure = data.create.GetModel(coord, data.BotModel), id = 0, ChanceChangeDirectione = 50 };
-            return result;
+            return new Bot() { ModelCoord = coord, Figure = data.create.GetModel(coord, data.BotModel)};
+ 
         }
         
     }

@@ -1,38 +1,68 @@
-﻿using System;
-using System.Windows.Shapes;
+﻿using System.Windows.Shapes;
+using GeneticGame.Figure.FigureFactory;
+using System.Windows;
+using System.Windows.Media;
 
-namespace GeneticGame
+namespace GeneticGame.Figure.BotFigure
 {
-    class Bot: IFigureModel
+    class Bot: IFigureModel,IBot
     {
-        public void BotCycle()
-        {
-            
-        }
         protected BotCharacters characters;
-        public Bot()
-        {
-            characters = new BotCharacters(3,3,3);
-
-            energy = new BotEnergy(characters);
-        }
-        
-
         private BotEnergy energy;
         public Coord? MoveDirection { get; set; }
-        public int ChanceChangeDirectione { get; set; }
-        public Coord ModelCoord { get; set; }
-        public Ellipse Figure { get; set; }
-        public int id { get; set; }
-         
-        public void Eat()
+        public int ChanceChangeDirection
         {
-            
+            get { return characters.ChanceChangeDirectione; }
         }
 
-        public Bot Clone(int id)
+        public Coord ModelCoord { get; set; }
+        public Ellipse Figure { get; set; }
+        
+        
+
+        public void Step()
         {
-            return new MutateBot(ModelCoord,id);
+            energy.CycleEnergy();
+        }
+        public bool CheckPossibilityMakeBot()
+        {
+            return energy.FullEnergyForClone();
+        }
+        public void Eat()
+        {
+            energy.EatEnergy();
+        }
+        public bool BotDied()
+        {
+            return energy.LowEnergy();
+        }
+
+        public int Speed
+        {
+            get
+            {
+                return characters.Speed;
+            }
+        }
+        public Bot()
+        {
+            characters = new BotCharacters { ChanceChangeDirectione = 50, EnergyForCloned = 40000, Size = 4, Speed = 4 };
+            energy = new BotEnergy(characters);
+        }   
+        private Bot(Bot other)
+        {
+            characters = other.characters;
+            characters.Size=characters.Size.MutateChange(2);
+            characters.Speed=characters.Speed.MutateChange(2);
+            characters.EnergyForCloned=characters.EnergyForCloned.MutateChange(128);
+            characters.ChanceChangeDirectione = characters.ChanceChangeDirectione.MutateChange(20);
+            energy = new BotEnergy(characters);       
+        }
+        public Bot Clone()
+        {
+            energy.BotMakeClone();
+            DataManager data = DataManager.GetInstance();
+            return new Bot(this) { ModelCoord = this.ModelCoord, Figure = data.create.GetModel(this.ModelCoord, data.RedBotModel) };
         }
     }
 }

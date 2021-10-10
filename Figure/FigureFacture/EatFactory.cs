@@ -1,13 +1,13 @@
-﻿namespace GeneticGame
-{
-    public class EatFactory:FigureFactory
+﻿using GeneticGame.Figure.BotFigure;
+namespace GeneticGame.Figure.FigureFactory
+{ 
+    public class EatFactory
     {
-        protected override IFigureModel Make()
+        internal Eat Create()
         {
             Coord coord = Coord.GetRandomCoord();
             DataManager data = DataManager.GetInstance();
-            IFigureModel result = new Eat() { ModelCoord = coord, id=0, Figure = data.create.GetModel(coord, data.EatModel) };
-            return result;
+            return new Eat() { ModelCoord = coord, Figure = data.create.GetModel(coord, data.EatModel) };          
         }
     }
 }

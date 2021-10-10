@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 namespace GeneticGame
@@ -20,10 +19,8 @@ namespace GeneticGame
              Colors.Gold,
              Colors.Gray,
         };
-        Random rand;
         public ModelCreator()
         {
-            rand = new Random(DateTime.Now.Millisecond);
         }
        
         public Ellipse GetModel(Coord coord,ModelCreatorInput model)
@@ -44,8 +41,7 @@ namespace GeneticGame
             {
                 return model.ColorModel.Value;
             }
-            rand = new Random(rand.Next(DateTime.Now.Millisecond));
-            return colors[rand.Next(0, colors.Length)];
+            return colors[DataManager.GetInstance().rand.Next(0, colors.Length)];
         }
     }
 }

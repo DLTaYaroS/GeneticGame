@@ -2,10 +2,10 @@
 using System.Windows;
 namespace GeneticGame
 {
-    class MapaManager
+    class MapManager
     {
         MainWindow main;
-        public MapaManager(MainWindow _main)
+        public MapManager(MainWindow _main)
         { 
             main = _main;//
         }
@@ -19,6 +19,7 @@ namespace GeneticGame
             
             main.LayoutRoot.Children.Add(ellipse);
         }
+        
         public void ChangePosition(ModelCreatorInput model,Coord coord,Ellipse Figure)
         {
             Clean(Figure);

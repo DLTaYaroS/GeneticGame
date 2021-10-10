@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GeneticGame
+﻿namespace GeneticGame.Figure.BotFigure
 {
     class BotEnergy:IBotEnergy
     {
@@ -12,9 +6,10 @@ namespace GeneticGame
         public BotEnergy(BotCharacters characters)
         {
             EnergyCycle = 0;
-            EnergyCycle += characters.Size* characters.Size;
-            EnergyCycle += characters.Speed* characters.Speed;
-
+            Energy = 20000;
+            EnergyCycle += characters.Size*5;
+            EnergyCycle += characters.Speed *5;
+            EnergyFromEat = 20000;
             EnergyForCloned= characters.EnergyForCloned;
         }
         private int EnergyCycle;
@@ -39,7 +34,7 @@ namespace GeneticGame
         }
         public void BotMakeClone()
         {
-            Energy -= EnergyCycle * 4;
+            Energy -= EnergyCycle * 100;
         }
         public bool LowEnergy()
         {
