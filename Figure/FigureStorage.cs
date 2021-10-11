@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using GeneticGame.Figure.BotFigure;
 namespace GeneticGame
@@ -27,7 +26,7 @@ namespace GeneticGame
             foreach(Bot bot in bots)
             {
                 Bots.Remove(bot);
-                DataManager.GetInstance().mapa.Clean(bot.Figure);
+                DataManager.GetInstance().mapa.Clean(bot.Model);
             }
         }
         public void AddBots(IEnumerable<Bot> bots)

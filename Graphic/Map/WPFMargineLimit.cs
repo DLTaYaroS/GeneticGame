@@ -1,6 +1,6 @@
 ﻿namespace GeneticGame.Map
 {
-    struct MargineLimit
+    struct WPFMargineLimit
     {
         public int LeftMargine { get; set; }
         public int RightMargine { get; set; }

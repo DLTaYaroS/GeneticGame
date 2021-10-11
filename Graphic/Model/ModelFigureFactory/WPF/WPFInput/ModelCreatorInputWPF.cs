@@ -5,7 +5,7 @@ using System.Windows.Shapes;
 
 namespace GeneticGame
 {
-    class ModelCreatorInput
+    class ModelCreatorInputWPF
     {
         public int Width { get; set; }
         public int Height { get; set; }

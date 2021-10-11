@@ -1,10 +1,10 @@
-﻿using System.Windows.Shapes;
-using GeneticGame.Figure.FigureFactory;
+﻿using GeneticGame.Graphic.ModelFigureFactory.WPF.WPFInput;
+
 namespace GeneticGame.Figure.BotFigure
 {
-    class Eat: IFigureModel
+    class Eat
     {
         public Coord ModelCoord { get; set; }
-        public Ellipse Figure { get; set; }
+        public WPFModel Model { get; set; }
     } 
 }

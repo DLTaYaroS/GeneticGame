@@ -6,10 +6,10 @@
         public BotEnergy(BotCharacters characters)
         {
             EnergyCycle = 0;
-            Energy = 20000;
+            Energy = 1000000;
             EnergyCycle += characters.Size*5;
             EnergyCycle += characters.Speed *5;
-            EnergyFromEat = 20000;
+            EnergyFromEat = 5000;
             EnergyForCloned= characters.EnergyForCloned;
         }
         private int EnergyCycle;
@@ -34,7 +34,8 @@
         }
         public void BotMakeClone()
         {
-            Energy -= EnergyCycle * 100;
+            Energy -= EnergyCycle * 4;
+            Energy -= (int)EnergyForCloned/3;
         }
         public bool LowEnergy()
         {

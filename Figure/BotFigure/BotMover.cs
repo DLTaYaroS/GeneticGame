@@ -4,12 +4,12 @@ namespace GeneticGame.Figure.BotFigure
     class BotMover
     {
         DataManager data;
-        MargineLimit limit;
+        WPFMargineLimit limit;
         private int StepGo;
         Coord coord;
         Coord Direction;
-        private MapManager mapa;
-        public BotMover(MargineLimit _limit)
+        private WPFMap mapa;
+        public BotMover(WPFMargineLimit _limit)
         {
             limit = _limit;
             data = DataManager.GetInstance();
@@ -21,7 +21,7 @@ namespace GeneticGame.Figure.BotFigure
             coord.X += Direction.X;
             coord.Y += Direction.Y;           
         }
-        public void MoveBot(Bot bot, ModelCreatorInput model)
+        public void MoveBot(Bot bot, ModelCreatorInputWPF model)
         {
             Direction.X = 0;
             Direction.Y = 0;
@@ -29,7 +29,12 @@ namespace GeneticGame.Figure.BotFigure
             StepGo = bot.Speed;
             if (!BotOverMargine())
             {
-                if (bot.ChanceChangeDirection > data.rand.Next(1, 100) && bot.MoveDirection != null)
+                Coord aim = BotAim.GetDirectione(coord);
+                if (!Direction.Equals(aim))
+                {
+                    Direction = aim;
+                }
+                else if (bot.ChanceChangeDirection > data.rand.Next(1, 100) && bot.MoveDirection != null)
                 {
                     Direction = (Coord)bot.MoveDirection;
  
@@ -43,7 +48,7 @@ namespace GeneticGame.Figure.BotFigure
             ChangeCoord();
             bot.MoveDirection = Direction;
             bot.ModelCoord = coord;
-            mapa.ChangePosition(model, bot.ModelCoord, bot.Figure);
+            mapa.ChangePosition(model, bot.ModelCoord, bot.Model);
         }
         private void Down()
         {

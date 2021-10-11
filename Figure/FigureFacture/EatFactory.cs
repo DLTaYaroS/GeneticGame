@@ -7,7 +7,7 @@ namespace GeneticGame.Figure.FigureFactory
         {
             Coord coord = Coord.GetRandomCoord();
             DataManager data = DataManager.GetInstance();
-            return new Eat() { ModelCoord = coord, Figure = data.create.GetModel(coord, data.EatModel) };          
+            return new Eat() { ModelCoord = coord, Model = data.create.GetModel(coord, data.EatModel) };          
         }
     }
 }

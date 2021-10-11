@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneticGame", "GeneticGame.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneticGameTest", "..\GeneticGameTest\GeneticGameTest.csproj", "{39D4B084-235E-498D-B2C3-7E8B7A909C4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFGraphicGeneticGame", "..\WPFGraphicGeneticGame\WPFGraphicGeneticGame.csproj", "{27C0170F-499C-4CA2-AFA5-5A9F43F2A014}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{39D4B084-235E-498D-B2C3-7E8B7A909C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39D4B084-235E-498D-B2C3-7E8B7A909C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39D4B084-235E-498D-B2C3-7E8B7A909C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C0170F-499C-4CA2-AFA5-5A9F43F2A014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C0170F-499C-4CA2-AFA5-5A9F43F2A014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C0170F-499C-4CA2-AFA5-5A9F43F2A014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C0170F-499C-4CA2-AFA5-5A9F43F2A014}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

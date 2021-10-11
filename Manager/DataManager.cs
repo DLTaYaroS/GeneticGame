@@ -14,10 +14,10 @@ namespace GeneticGame
         public BotMover move { get; private set; }
         public MapManager mapa { get; private set; }
         public ModelCreator create { get; private set; }
-        public MargineLimit limit { get;  set; }
+        public WPFMargineLimit limit { get;  set; }
         public void SetMainWindow(MainWindow main)
         {
-            limit = new MargineLimit
+            limit = new WPFMargineLimit
             {
                 LeftMargine = -Convert.ToInt32(main.Width ),
                 UpMargine = -Convert.ToInt32(main.Height ),
