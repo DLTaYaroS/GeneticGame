@@ -2,7 +2,7 @@
 using GeneticGame.Figure.FigureFactory;
 namespace GeneticGame.Figure.BotFigure
 {
-    class Eat: IFigureModel
+    class Eat
     {
         public Coord ModelCoord { get; set; }
         public Ellipse Figure { get; set; }

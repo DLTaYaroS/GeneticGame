@@ -3,7 +3,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 namespace GeneticGame
 {
-    class ModelCreator
+    class ModelCreatorWPF
     {        
         Color[] colors = new Color[] {
              Colors.Red,
@@ -19,11 +19,11 @@ namespace GeneticGame
              Colors.Gold,
              Colors.Gray,
         };
-        public ModelCreator()
+        public ModelCreatorWPF()
         {
         }
        
-        public Ellipse GetModel(Coord coord,ModelCreatorInput model)
+        public Ellipse GetModel(Coord coord,ModelCreatorInputWPF model)
         {
             Ellipse elipse = new Ellipse();
             elipse.Width = model.Width;
@@ -35,7 +35,7 @@ namespace GeneticGame
             return elipse;
         }
 
-        private Color GetColor(ModelCreatorInput model)//if model.Color==null return random color
+        private Color GetColor(ModelCreatorInputWPF model)//if model.Color==null return random color
         {
             if (model.ColorModel !=null)
             {

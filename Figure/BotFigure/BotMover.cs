@@ -29,7 +29,12 @@ namespace GeneticGame.Figure.BotFigure
             StepGo = bot.Speed;
             if (!BotOverMargine())
             {
-                if (bot.ChanceChangeDirection > data.rand.Next(1, 100) && bot.MoveDirection != null)
+                Coord aim = BotAim.GetDirectione(coord);
+                if (!Direction.Equals(aim))
+                {
+                    Direction = aim;
+                }
+                else if (bot.ChanceChangeDirection > data.rand.Next(1, 100) && bot.MoveDirection != null)
                 {
                     Direction = (Coord)bot.MoveDirection;
  

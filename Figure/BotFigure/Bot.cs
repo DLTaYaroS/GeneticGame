@@ -46,16 +46,16 @@ namespace GeneticGame.Figure.BotFigure
         }
         public Bot()
         {
-            characters = new BotCharacters { ChanceChangeDirectione = 50, EnergyForCloned = 40000, Size = 4, Speed = 4 };
+            characters = new BotCharacters { ChanceChangeDirectione = 50, EnergyForCloned = 1100500, Size = 10, Speed = 10 };
             energy = new BotEnergy(characters);
         }   
         private Bot(Bot other)
         {
             characters = other.characters;
-            characters.Size=characters.Size.MutateChange(2);
-            characters.Speed=characters.Speed.MutateChange(2);
-            characters.EnergyForCloned=characters.EnergyForCloned.MutateChange(128);
-            characters.ChanceChangeDirectione = characters.ChanceChangeDirectione.MutateChange(20);
+            characters.Size=characters.Size.MutateChange(4);
+            characters.Speed=characters.Speed.MutateChange(4);
+            characters.EnergyForCloned=characters.EnergyForCloned.MutateChange(528);
+            characters.ChanceChangeDirectione = characters.ChanceChangeDirectione.MutateChange(40);
             energy = new BotEnergy(characters);       
         }
         public Bot Clone()

@@ -3,7 +3,12 @@ namespace GeneticGame
 { 
     public struct Coord:IEquatable<Coord>
     {
-       
+        public static Coord operator +(Coord a, Coord b) => new Coord
+        {
+            X = a.X + b.X,
+            Y = a.Y + b.Y,
+        };
+
         public static Coord GetRandomCoord()
         {
 
