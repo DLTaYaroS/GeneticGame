@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Threading.Tasks;
+using GeneticGameLogic.Manager;
+
 namespace GeneticGame
 {
     /// <summary>
@@ -13,7 +15,6 @@ namespace GeneticGame
         public MainWindow()
         {        
             InitializeComponent();
-            DataManager.GetInstance().SetMainWindow(this);
             Game = new GameManager();
         }
 
