@@ -1,41 +1,29 @@
 ﻿using System;
 using System.Windows;
 using System.Threading.Tasks;
-using GeneticGameLogic.Manager;
+using GeneticGameWPF;
 
 namespace GeneticGame
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         
-        GameManager Game;
+        
         public MainWindow()
         {        
             InitializeComponent();
-            Game = new GameManager();
+            
         }
-
-        private async void ClickMe(object sender, RoutedEventArgs e)
+        public void StartButton(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < 1000; i++)
-            {
-               await Game.GameCycle();            
-              
-            }
+           
+            GeneticGameWPF.MainWindow mw = new GeneticGameWPF.MainWindow();
+            mw.Show();
+
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
         
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
-        {     
-            Game.Start();
-            for (int i = 0; i < 100000; i++)
-            {
-               await Game.GameCycle();
-            }
         }
-       
-        
     }
 }
