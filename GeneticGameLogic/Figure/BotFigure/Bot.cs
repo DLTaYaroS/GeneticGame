@@ -53,10 +53,10 @@ namespace GeneticGameLogic.Figure.BotFigure
         private Bot(Bot other)
         {
             characters = other.characters;
-            characters.Size=characters.Size.MutateChange(4);
-            characters.Speed=characters.Speed.MutateChange(4);
-            characters.EnergyForCloned=characters.EnergyForCloned.MutateChange(528);
-            characters.ChanceChangeDirectione = characters.ChanceChangeDirectione.MutateChange(40);
+            characters.Size.MutateChange(4);
+            characters.Speed.MutateChange(4);
+            characters.EnergyForCloned.MutateChange(528);
+            characters.ChanceChangeDirectione.MutateChange(40);
             energy = new BotEnergy(characters);       
         }
         public Bot Clone()
