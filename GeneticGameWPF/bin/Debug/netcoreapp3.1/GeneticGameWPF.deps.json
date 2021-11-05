@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "GeneticGameWPF/1.0.0": {
+        "dependencies": {
+          "GeneticGameLogic": "1.0.0"
+        },
+        "runtime": {
+          "GeneticGameWPF.dll": {}
+        }
+      },
+      "GeneticGameLogic/1.0.0": {
+        "runtime": {
+          "GeneticGameLogic.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GeneticGameWPF/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GeneticGameLogic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
